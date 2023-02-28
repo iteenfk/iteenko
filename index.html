@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>パスワードジェネレーター</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>パスワードジェネレーター</h1>
+    <main>
+        <p id="result">aaa111rrr</p>  
+
+        <button id="btn">パスワード生成</button>
+
+        <fieldset>
+            <legend>オプション</legend>
+            <label>
+                長さ(<span id="passward-length">8</span>)
+                                                <!-- スライダーの範囲を指定 -->
+                <input type="range" id="slider" min="8" max="24" value="8">
+            </label>
+            <label>
+                数字
+                <input type="checkbox" id="numbers-checkbox">
+            </label>
+            <label>
+                記号
+                <input type="checkbox" id="symbols-checkbox">
+            </label>
+
+        </fieldset>
+    </main>
+    <footer>
+        2023年2月 iTeen 福岡春日校
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+</html>
