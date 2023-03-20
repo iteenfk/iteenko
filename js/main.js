@@ -1,38 +1,142 @@
-"use strict"
+"use strict";
 
-const slider = document.getElementById("slider");
-const btn = document.getElementById("btn");
+const canvas = document.getElementById("canvassample");
+const ctx = canvas.getContext("2d");
+let moveflg = 0;
+let Xpoint;
+let Ypoint;
+let temp = [];
 
-slider.addEventListener("input", () =>{
-    const passwardLength = document.getElementById("passward-length");
+//初期値（サイズ、色、アルファ値）の決定
+const defSize = 7;
+const defColor = "#555";
 
-    passwardLength.textContent = slider.value;
-});
+// キャンバスを白色に塗る
+ctx.fillStyle = "rgb(255,255,255)";
 
-btn.addEventListener("click", () =>{
-    
-    const result = document.getElementById("result");
-    const numbersCheckbox = document.getElementById("numbers-checkbox");
-    const symbolsCheckbox = document.getElementById("symbols-checkbox");
+// ストレージの初期化
+const myStorage = localStorage;
+window.addEventListener("load", initLocalStorage);
 
-    const letters ="abcdefghijklmnopqrstuvwxyz";
-    const numbers ="0123456789";
-    const symbols = "#$%&()!{}*+|~[]";
+// PC対応
+canvas.addEventListener("mousedown", startPoint, false);
+canvas.addEventListener("mousemove", movePoint, false);
+canvas.addEventListener("mouseup", endPoint, false);
+// スマホ対応
+canvas.addEventListener("touchstart", startPoint, false);
+canvas.addEventListener("touchmove", movePoint, false);
+canvas.addEventListener("touchend", endPoint, false);
 
-    let passward = "";
-    let seed = letters + letters.toUpperCase();
+function startPoint(e){
+  e.preventDefault();
+  ctx.beginPath();
 
-    if (numbersCheckbox.checked === true){
-        seed += numbers;
+  Xpoint = e.layerX;
+  Ypoint = e.layerY;
+
+  ctx.moveTo(Xpoint, Ypoint);
+}
+
+function movePoint(e){
+  if(e.buttons === 1 || e.buttons === 1 || e.type === "touchmove"){
+    Xpoint = e.layerX;
+    Ypoint = e.layerY;
+    moveflg = 1;
+
+    ctx.lineTo(Xpoint, Ypoint);
+    ctx.lineCap = "round";
+    ctx.lineWidth = defSize * 2;
+    ctx.strokeStyle = defColor;
+    ctx.stroke();
+  }
+}
+
+function endPoint(e)
+{
+    if(moveflg === 0){
+       ctx.lineTo(Xpoint-1, Ypoint-1);
+       ctx.lineCap = "round";
+       ctx.lineWidth = defSize * 2;
+       ctx.strokeStyle = defColor;
+       ctx.stroke();
+
     }
+    moveflg = 0;
+    setLocalStorage();
+}
 
-    if (symbolsCheckbox.checked === true){
-        seed += symbols;
+function clearCanvas(){
+    if(confirm("Canvasを初期化しますか？"))
+    {
+        initLocalStorage();
+        temp = [];
+        resetCanvas();
     }
+}
 
-    for (let i = 0; i < slider.value; i++){
-        passward += seed[Math.floor(Math.random() * seed.length)];
+function resetCanvas() {
+    ctx.clearRect(0, 0, ctx.canvas.clientWidth, ctx.canvas.clientHeight);
+    ctx.fillStyle = "rgb(255,255,255)";
+}
+
+function chgImg()
+{
+    const png = canvas.toDataURL();
+    document.getElementById("newImg").src = png;
+}
+
+function initLocalStorage(){
+    myStorage.setItem("__log", JSON.stringify([]));
+}
+
+function setLocalStorage(){
+    const png = canvas.toDataURL();
+    const logs = JSON.parse(myStorage.getItem("__log"));
+
+    setTimeout(function(){
+        logs.unshift({png:png});
+        myStorage.setItem("__log", JSON.stringify(logs));
+        temp = [];
+    }, 0);
+}
+
+function prevCanvas(){
+    const logs = JSON.parse(myStorage.getItem("__log"));
+
+    if(logs.length > 0){
+        temp.unshift(logs.shift());
+
+        setTimeout(function(){
+            myStorage.setItem("__log", JSON.stringify(logs));
+            resetCanvas();
+            if (logs.length > 0) {
+              draw(logs[0]["png"]);
+            }
+        }, 0);
     }
+}
 
-    result.textContent = passward;
-});
+function nextCanvas(){
+    const logs = JSON.parse(myStorage.getItem("__log"));
+
+    if(temp.length > 0){
+        logs.unshift(temp.shift());
+
+        setTimeout(function(){
+            myStorage.setItem("__log", JSON.stringify(logs));
+            resetCanvas();
+            draw(logs[0]["png"]);
+        }, 0);
+    }
+}
+
+function draw(src) {
+    var img = new Image();
+    img.src = src;
+ 
+    img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+    }
+}
+ 
+
