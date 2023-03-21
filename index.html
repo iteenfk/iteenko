@@ -1,24 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canvas</title>
+    <title>計算機アプリ</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <canvas id="canvassample" width="500" height="300"></canvas>
-    <div style="padding:10px">
-        <button type="button" onclick="clearCanvas()">リセット</button>
-        <button type="button" onclick="prevCanvas()">戻る</button>
-        <button type="button" onclick="nextCanvas()">進む</button>
+    <h1>iTeen 電卓</h1>
+    <div class="cal">
+        <input type="text" id="firstNumber" placeholder="0" style="text-align: right;">
+        <br>
+        <input type="text" id="secondNumber" placeholder="0" style="text-align: right;">
+        <br>
+        <button onclick="add()">+</button>
+        <button onclick="subtract()">-</button>
+        <button onclick="multiply()">×</button>
+        <button onclick="divide()">÷</button>
+        <button onclick="clearResult()">C</button>
+        <button onclick="triangle()">三角面積</button>
+        <br>
+        <input type="text" id="result" placeholder="0" readonly style="text-align: right;">
+    
     </div>
-    <div style="padding:10px">
-        <button type="button" onclick="chgImg()" value="1">画像変換</button>
-    </div>
-    <h2>画像出力<h2> 
-    <div id="img-box"><img id="newImg"></div>
+
     <script src="js/main.js"></script>
 </body>
 </html>
