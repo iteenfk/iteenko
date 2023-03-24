@@ -1,46 +1,62 @@
  "use strict"
 
   function add() {
-    const firstNumber = parseFloat(document.getElementById("firstNumber").value);
-    const secondNumber = parseFloat(document.getElementById("secondNumber").value);
-    const result = firstNumber + secondNumber;
-    document.getElementById("result").value = result;
+    const x = parseFloat(document.getElementById("x").value);
+    const y = parseFloat(document.getElementById("y").value);
+    const z = x + y;
+    document.getElementById("z").value = z;
   }
   
-  function subtract() {
-    
-    const firstNumber = parseFloat(document.getElementById("firstNumber").value);
-    const secondNumber = parseFloat(document.getElementById("secondNumber").value);
-    const result = firstNumber - secondNumber;
-    document.getElementById("result").value = result;
+  function sub() {
+    const x = parseFloat(document.getElementById("x").value);
+    const y = parseFloat(document.getElementById("y").value);
+    const z = x - y;
+    document.getElementById("z").value = z;
   }
   
-  function multiply() {
-    const firstNumber = parseFloat(document.getElementById("firstNumber").value);
-    const secondNumber = parseFloat(document.getElementById("secondNumber").value);
-    const result = firstNumber * secondNumber;
-    document.getElementById("result").value = result;
+  function mul() {
+    const x = parseFloat(document.getElementById("x").value);
+    const y = parseFloat(document.getElementById("y").value);
+    const z = x * y;
+    document.getElementById("z").value = z;
   }
   
-  function divide() {
-    const firstNumber = parseFloat(document.getElementById("firstNumber").value);
-    const secondNumber = parseFloat(document.getElementById("secondNumber").value);
-    const result = firstNumber / secondNumber;
-    document.getElementById("result").value = result;
+  function div() {
+    const x = parseFloat(document.getElementById("x").value);
+    const y = parseFloat(document.getElementById("y").value);
+    const z = x / y;
+    document.getElementById("z").value = z;
   }
 
-  function clearResult() {
-    document.getElementById("firstNumber").value = 0;
-    document.getElementById("secondNumber").value = 0;
-    document.getElementById("result").value = 0;
+  function cl() {
+    document.getElementById("x").value = 0;
+    document.getElementById("y").value = 0;
+    document.getElementById("z").value = 0;
   }
 
-  function triangle() {
-    const firstNumber = parseFloat(document.getElementById("firstNumber").value);
-    const secondNumber = parseFloat(document.getElementById("secondNumber").value);
-    const result = (firstNumber * secondNumber) / 2;
-    document.getElementById("result").value = result;
+  function rem() {
+    const x = parseFloat(document.getElementById("x").value);
+    const y = parseFloat(document.getElementById("y").value);
+    const z = x % y;
+    document.getElementById("z").value = z;
 
   }
+
+  function quo() {
+    const x = parseFloat(document.getElementById("x").value);
+    const y = parseFloat(document.getElementById("y").value);
+    const z = Math.floor(x / y);
+    document.getElementById("z").value = z;
+
+  }
+
+  function squ() {
+    const x = parseFloat(document.getElementById("x").value);
+    const z = Math.sqrt(x);
+    document.getElementById("z").value = z;
+
+  }
+
+
 
   
