@@ -1,32 +1,23 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>計算機アプリ</title>
-    <link rel="stylesheet" href="css/style.css">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>予定リスト</title>
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>iTeen 電卓</h1>
-    <div class="cal">
-        x:<input type="text" id="x" placeholder="0">
-        <br>
-        y:<input type="text" id="y" placeholder="0">
-        <br>
-        <button onclick="add()">+</button>
-        <button onclick="sub()">-</button>
-        <button onclick="mul()">×</button>
-        <button onclick="div()">÷</button>
-        <button onclick="cl()">C</button>
-        <button onclick="quo()">商</button>
-        <button onclick="rem()">余り</button>
-        <button onclick="squ()">x:平方根</button>
-        <br>
-        <input type="text" id="z" placeholder="0" readonly>
-    
-    </div>
+	<h1>予定管理リスト</h1>
+	<div class="main">
+		<input type="text" id="new" placeholder="予定をいれてね">
+		<button onclick="addToDo()">予定の追加</button>
+		<ul id="toDoList">
+			<!-- ここに追加されたリストがはいる -->
+		</ul>
+		<button onclick="printpdf()">プリント</button>
+	</div>
 
-    <script src="js/main.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>

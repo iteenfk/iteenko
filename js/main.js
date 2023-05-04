@@ -1,62 +1,19 @@
- "use strict"
+"use strict"
 
-  function add() {
-    const x = parseFloat(document.getElementById("x").value);
-    const y = parseFloat(document.getElementById("y").value);
-    const z = x + y;
-    document.getElementById("z").value = z;
-  }
-  
-  function sub() {
-    const x = parseFloat(document.getElementById("x").value);
-    const y = parseFloat(document.getElementById("y").value);
-    const z = x - y;
-    document.getElementById("z").value = z;
-  }
-  
-  function mul() {
-    const x = parseFloat(document.getElementById("x").value);
-    const y = parseFloat(document.getElementById("y").value);
-    const z = x * y;
-    document.getElementById("z").value = z;
-  }
-  
-  function div() {
-    const x = parseFloat(document.getElementById("x").value);
-    const y = parseFloat(document.getElementById("y").value);
-    const z = x / y;
-    document.getElementById("z").value = z;
-  }
+function addToDo() {
+    const newToDo = document.getElementById("new").value;
 
-  function cl() {
-    document.getElementById("x").value = 0;
-    document.getElementById("y").value = 0;
-    document.getElementById("z").value = 0;
-  }
+    const li = document.createElement("li");
 
-  function rem() {
-    const x = parseFloat(document.getElementById("x").value);
-    const y = parseFloat(document.getElementById("y").value);
-    const z = x % y;
-    document.getElementById("z").value = z;
+    const text = document.createTextNode(newToDo);
+    li.appendChild(text);
 
-  }
+    const ul = document.getElementById("toDoList");
+    ul.appendChild(li);
 
-  function quo() {
-    const x = parseFloat(document.getElementById("x").value);
-    const y = parseFloat(document.getElementById("y").value);
-    const z = Math.floor(x / y);
-    document.getElementById("z").value = z;
+    document.getElementById("new").value = "";
+}
 
-  }
-
-  function squ() {
-    const x = parseFloat(document.getElementById("x").value);
-    const z = Math.sqrt(x);
-    document.getElementById("z").value = z;
-
-  }
-
-
-
-  
+function printpdf() {
+    window.print();
+}
