@@ -1,19 +1,27 @@
 "use strict"
 
-function addToDo() {
-    const newToDo = document.getElementById("new").value;
+function S() {
+    let inp = document.getElementById("inp").value;
+    let out = document.getElementById("out");
+  
+    let li = document.createElement("li");
+    li.textContent = inp;
+  
+    out.appendChild(li);
 
-    const li = document.createElement("li");
+    document.getElementById("inp").value = "";
+  }
+  
+function C(){
+  const ul = document.getElementById("out");
+  while (ul.firstChild != null) {
+      ul.removeChild(ul.firstChild);
+  }
 
-    const text = document.createTextNode(newToDo);
-    li.appendChild(text);
-
-    const ul = document.getElementById("toDoList");
-    ul.appendChild(li);
-
-    document.getElementById("new").value = "";
 }
 
-function printpdf() {
-    window.print();
+
+function P(){
+    window.print()
 }
+

@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>予定リスト</title>
-	<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雑書きアプリ</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<h1>予定管理リスト</h1>
-	<div class="main">
-		<input type="text" id="new" placeholder="予定をいれてね">
-		<button onclick="addToDo()">予定の追加</button>
-		<ul id="toDoList">
-			<!-- ここに追加されたリストがはいる -->
-		</ul>
-		<button onclick="printpdf()">プリント</button>
-	</div>
+    <h1>なんでも雑書き帳</h1>
 
-	<script src="js/main.js"></script>
+  <div id="x">
+    <h4>入力エリア</h4>
+    <textarea id="inp" placeholder="なんでも入力してね！"></textarea>
+    <br>
+    <button onclick="S()">結果出力</button>
+    <button onclick="C()">出力削除</button>
+    <button onclick="P()">PDFに保存</button>
+  </div>
+  <br>
+  <div id="y">
+    <h4>出力エリア</h4>
+    <ul id="out"></ul>
+  </div>
+  <script src="js/main.js"></script>
 </body>
 </html>
