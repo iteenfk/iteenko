@@ -2,27 +2,93 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>雑書きアプリ</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>ボリュームコントロール</title>
+    <style>
+    body {
+        width: 100%;
+    }
+
+    .main{
+        border: 1px solid black;
+        width: 30%;
+        margin: 10px auto;
+        border-radius: 10px;
+    }
+
+    h1{
+        font-size: 15px;
+        text-align: center;
+    }
+
+    .in{
+        width: 100%;
+        text-align: center;
+    }
+
+    input{
+        width: 50%;
+        text-align: center;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+    </style>
 </head>
 <body>
-    <h1>なんでも雑書き帳</h1>
+    <div class="main">
+        <h1>iTeen 音楽Player</h1>
+        <audio id="player" src="test.mp3"></audio>
+        
+        <div class="btn">
+            <button onclick="play()">再生</button>
+            <button onclick="pause()">一時停止</button>
+            <button onclick="stop()">停止</button>
+        </div>
+        <br>
+        <div class="in">
+            <input type="range" id="slider" oninput="volume()" min="0" max="100" value="50" >
+            <p id="out">50%</p>
+        </div>   
+    </div>
 
-  <div id="x">
-    <h4>入力エリア</h4>
-    <textarea id="inp" placeholder="なんでも入力してね！"></textarea>
-    <br>
-    <button onclick="S()">結果出力</button>
-    <button onclick="C()">出力削除</button>
-    <button onclick="P()">PDFに保存</button>
-  </div>
-  <br>
-  <div id="y">
-    <h4>出力エリア</h4>
-    <ul id="out"></ul>
-  </div>
-  <script src="js/main.js"></script>
+    <script>
+        // 音量スライダーの要素を取得
+        const volumeSlider = document.getElementById("slider");
+
+        // 音量値表示用の要素を取得
+        const volumeValue = document.getElementById("out");
+
+        // オーディオ要素を取得
+        const audio = document.getElementById("player");
+
+        // 音量スライダーの値が変更された時の処理
+        function volume() {
+            const value = volumeSlider.value;
+            volumeValue.textContent = value + "%";
+
+            // 音量を設定
+            audio.volume = value / 100;
+        }
+
+        // 音楽再生ボタンのクリック処理
+        function play() {
+            audio.play();
+        }
+
+        // 音楽一時停止ボタンのクリック処理
+        function pause() {
+            audio.pause();
+        }
+
+        function stop() {
+            audio.pause();
+            audio.currentTime = 0;
+            }
+
+    </script>
+
 </body>
 </html>
