@@ -3,92 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ボリュームコントロール</title>
+    <title>QRコード生成アプリ</title>
     <style>
-    body {
-        width: 100%;
-    }
+        h1{
+            text-align: center;
+        }
+        .in_c{
+            border: 5px dotted red;
+            border-radius: 10px;
+            width: 500px;
+            margin: auto;
+            text-align: center;
+            padding: 10px;
+        }
+        .size_c {
+            width: 50px;
+        }
+        .output_c{
+            display: inline-block;
+        }
+        .out_c{
+            text-align: center;
+        }
 
-    .main{
-        border: 1px solid black;
-        width: 30%;
-        margin: 10px auto;
-        border-radius: 10px;
-    }
-
-    h1{
-        font-size: 15px;
-        text-align: center;
-    }
-
-    .in{
-        width: 100%;
-        text-align: center;
-    }
-
-    input{
-        width: 50%;
-        text-align: center;
-    }
-
-    .btn {
-        width: 100%;
-        text-align: center;
-    }
     </style>
+    <!-- QRコード生成ライブラリのCDN -->
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 </head>
 <body>
-    <div class="main">
-        <h1>iTeen 音楽Player</h1>
-        <audio id="player" src="test.mp3"></audio>
-        
-        <div class="btn">
-            <button onclick="play()">再生</button>
-            <button onclick="pause()">一時停止</button>
-            <button onclick="stop()">停止</button>
-        </div>
-        <br>
-        <div class="in">
-            <input type="range" id="slider" oninput="volume()" min="0" max="100" value="50" >
-            <p id="out">50%</p>
-        </div>   
+    <h1>QRコード作成</h1>
+    <div class="in_c">
+        URL: <input type="text" id="url_id" placeholder="urlを入れる">
+        <br>幅、高さ(標準は256): <input type="number" class="size_c" id="size_id">
+        <br><button onclick="qr_btn()">作成</button> <button onclick="prn()">プリント</button>
+
+    </div>
+    <br><br>
+    <div class="out_c">
+        <div id="output_id" class="output_c"></div>
     </div>
 
     <script>
-        // 音量スライダーの要素を取得
-        const volumeSlider = document.getElementById("slider");
-
-        // 音量値表示用の要素を取得
-        const volumeValue = document.getElementById("out");
-
-        // オーディオ要素を取得
-        const audio = document.getElementById("player");
-
-        // 音量スライダーの値が変更された時の処理
-        function volume() {
-            const value = volumeSlider.value;
-            volumeValue.textContent = value + "%";
-
-            // 音量を設定
-            audio.volume = value / 100;
-        }
-
-        // 音楽再生ボタンのクリック処理
-        function play() {
-            audio.play();
-        }
-
-        // 音楽一時停止ボタンのクリック処理
-        function pause() {
-            audio.pause();
-        }
-
-        function stop() {
-            audio.pause();
-            audio.currentTime = 0;
+        function qr_btn() {
+            // QRコードを生成するデータ
+            const url = document.getElementById("url_id").value;
+            const size = document.getElementById("size_id").value; 
+            if (url != "" && size != ""){
+                // QRコードを表示する要素の取得
+                const qr_output = document.getElementById("output_id");
+    
+                // QRコードを生成
+                new QRCode(qr_output, {text: url,width: size,height: size});
+                document.getElementById("url_id").value = "";
+                document.getElementById("size_id").value = ""; 
             }
+        }
 
+        function prn(){
+            window.print();
+        }
     </script>
-
 </body>
 </html>
+
