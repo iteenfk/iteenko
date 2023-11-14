@@ -1,68 +1,65 @@
-<!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QRコード生成アプリ</title>
-    <style>
-        h1{
-            text-align: center;
-        }
-        .in_c{
-            border: 5px dotted red;
-            border-radius: 10px;
-            width: 500px;
-            margin: auto;
-            text-align: center;
-            padding: 10px;
-        }
-        .size_c {
-            width: 50px;
-        }
-        .output_c{
-            display: inline-block;
-        }
-        .out_c{
-            text-align: center;
-        }
-
-    </style>
-    <!-- QRコード生成ライブラリのCDN -->
-    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+  <title>ラジオボタンアプリ</title>
+  <style>
+    body {
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
-    <h1>QRコード作成</h1>
-    <div class="in_c">
-        URL: <input type="text" id="url_id" placeholder="urlを入れる">
-        <br>幅、高さ(標準は256): <input type="number" class="size_c" id="size_id">
-        <br><button onclick="qr_btn()">作成</button> <button onclick="prn()">プリント</button>
 
-    </div>
-    <br><br>
-    <div class="out_c">
-        <div id="output_id" class="output_c"></div>
-    </div>
+  <h1>好きな言語を選んでください</h1>
 
-    <script>
-        function qr_btn() {
-            // QRコードを生成するデータ
-            const url = document.getElementById("url_id").value;
-            const size = document.getElementById("size_id").value; 
-            if (url != "" && size != ""){
-                // QRコードを表示する要素の取得
-                const qr_output = document.getElementById("output_id");
+  <input type="radio" name="language" value="JavaScript">JavaScript
+
+  <input type="radio" name="language" value="Python">Python
+
+  <input type="radio" name="language" value="Scratch">Scratch
+  
+  <br><button onclick="btn()">クリック</button>
+
+  <div id="output_id"></div>
+  <div id="img_id"></div>
+
+  <script>
     
-                // QRコードを生成
-                new QRCode(qr_output, {text: url,width: size,height: size});
-                document.getElementById("url_id").value = "";
-                document.getElementById("size_id").value = ""; 
-            }
+    function btn(){
+       const output = document.getElementById("output_id");
+       const languages = document.getElementsByName("language");
+       const img = document.getElementById("img_id");
+
+       for (let i = 0; i <= 2; i++){
+       if (languages[i].checked == true){
+            const language = languages[i].value;
+            output.textContent = `好きな言語は${language}です。`;
+            
+            addImage(language, img)
+           }
+         
+        }
+　　　　
+      }
+
+     function addImage(language, img){
+        let path = "";
+        if (language == "JavaScript"){
+           path = "javascript.png";
+        } 
+        if (language == "Python"){
+           path = "python.png";
+        }
+        if (language == "Scratch"){
+           path = "Scratch.jpg";
         }
 
-        function prn(){
-            window.print();
-        }
-    </script>
+        const image = document.createElement("img");
+        image.src = path;
+        image.width = 300;
+        img.innerHTML = "";
+        img.appendChild(image);
+}
+  </script>
 </body>
 </html>
-
