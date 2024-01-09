@@ -1,65 +1,60 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-  <title>ラジオボタンアプリ</title>
-  <style>
-    body {
-      text-align: center;
-      padding: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-9-1</title>
+    <style>
+        #canvas_id{
+            border: 1px solid red;
+        }
+    </style>
 </head>
 <body>
+    <canvas id="canvas_id" width="500" height="400"></canvas>
+    <script>
+        class Circle{
+            constructor(color,radius,x,y){
+                this.color = color;
+                this.radius = radius;
+                this.x = x;
+                this.y = y;
+            }
 
-  <h1>好きな言語を選んでください</h1>
-
-  <input type="radio" name="language" value="JavaScript">JavaScript
-
-  <input type="radio" name="language" value="Python">Python
-
-  <input type="radio" name="language" value="Scratch">Scratch
-  
-  <br><button onclick="btn()">クリック</button>
-
-  <div id="output_id"></div>
-  <div id="img_id"></div>
-
-  <script>
-    
-    function btn(){
-       const output = document.getElementById("output_id");
-       const languages = document.getElementsByName("language");
-       const img = document.getElementById("img_id");
-
-       for (let i = 0; i <= 2; i++){
-       if (languages[i].checked == true){
-            const language = languages[i].value;
-            output.textContent = `好きな言語は${language}です。`;
-            
-            addImage(language, img)
-           }
-         
+            draw(){
+                const canvas = document.getElementById("canvas_id");
+                const ctx = canvas.getContext("2d");
+                ctx.clearRect(0,0,500,400);
+                ctx.beginPath();
+                ctx.arc(this.x,this.y,this.radius,0,360);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+            }
         }
-　　　　
-      }
+        const redCircle = new Circle("red",30,100,100);
 
-     function addImage(language, img){
-        let path = "";
-        if (language == "JavaScript"){
-           path = "javascript.png";
-        } 
-        if (language == "Python"){
-           path = "python.png";
-        }
-        if (language == "Scratch"){
-           path = "Scratch.jpg";
-        }
+        console.log(redCircle);
+        redCircle.draw();
 
-        const image = document.createElement("img");
-        image.src = path;
-        image.width = 300;
-        img.innerHTML = "";
-        img.appendChild(image);
-}
-  </script>
+        document.addEventListener("keydown",function(e){
+            if (e.key == "ArrowRight" && redCircle.x <= 460){
+                redCircle.x += 10;
+            }
+            if (e.key == "ArrowLeft" && redCircle.x >= 40){
+                redCircle.x -= 10;
+            }
+            if (e.key == "ArrowUp" && redCircle.y >= 40){
+                redCircle.y -= 10;
+            }
+            if (e.key == "ArrowDown" && redCircle.y <= 360){
+                redCircle.y += 10;
+            }
+
+            redCircle.draw();
+        });
+
+
+    </script>
 </body>
 </html>
